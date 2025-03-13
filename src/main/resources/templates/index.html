@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>Newsletters</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<h1>Justinas Newsletter Archive</h1>
+
+<form method="post">
+    <label for="email"></label>
+    <input type="email" name="email" id="email" placeholder="Email" required>
+    <button type="submit" name="learn more" th:formaction="@{/admin/newsletters/subscribe}">Learn more</button>
+</form>
+
+<div class="subscriber-message" th:if="${message}"><p th:text="${message}"></p></div>
+
+
+<h2>Nyhedsbreve - arkiv</h2>
+
+<div  th:unless="${newsletters == null}">
+    <div class="newsletter-wrapper">
+        <div class="newsletter" th:each="newsletter : ${newsletters}">
+            <p class="newsletter-title" th:text="${newsletter.title}"></p>
+            <a th:href="@{'/files/' + ${newsletter.pdfFileName}}">
+                <img th:src="${'files/' + newsletter.thumbnailFileName}"/>
+            </a>
+            <p class="teaser" th:text="${newsletter.teaserText}"></p>
+        </div>
+
+    </div>
+</div>
+
+
+<p><a href="../templates/admin/add-newsletter.html" th:href="@{/admin/newsletters/add}">Add newsletter</a></p>
+</body>
+</html>

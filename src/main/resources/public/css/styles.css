@@ -1,0 +1,109 @@
+/* Stylesheet for the application */
+
+:root {
+    padding:0;
+}
+
+body {
+    padding: 20px;
+}
+
+h1 {
+    color: #002E6D;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3rem;
+}
+
+.logo {
+    width: 200px;
+}
+
+.add-newsletter-form {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+}
+
+.add-newsletter-form input, textarea {
+    width: 100%;
+    padding: 10px;
+}
+
+.add-newsletter-form button {
+
+}
+
+.subscriber-message {
+    width: 15rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+.button {
+    display: inline-block;
+    background-color: #FBB040; /* Orange */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect */
+.button:hover {
+    background-color: #E89A36; /* Darker orange */
+    transform: translateY(-2px);
+}
+
+/* Click effect */
+.button:active {
+    background-color: #00408d;
+    transform: translateY(1px);
+}
+
+/* Disabled state */
+.button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.newsletter-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.newsletter {
+    width: 100%;
+    max-width: 280px;
+    border:1px solid silver;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content:stretch;
+}
+
+.teaser {
+    padding: 10px;
+    background-color: #FBB040;
+    color: black;
+    height: 100%;
+}
+
+.newsletter-title {
+    font-size: 1.25rem;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+

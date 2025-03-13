@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>Frontpage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<header>
+    <img src="../../public/images/cphbusiness.webp" th:src="@{/images/cphbusiness.webp}" alt="logo"/>
+</header>
+
+<h1>Tilføj et nyhedsbrev</h1>
+
+<form class="add-newsletter-form" method="post" enctype="multipart/form-data">
+    <label for="title">Titel (2025-nov-dec):</label>
+    <input type="text" id="title" name="title" required>
+
+    <label for="teaser_text">Teaser text (max 1000 tegn):</label>
+    <textarea id="teaser_text" name="teaser_text" rows="5" required></textarea>
+
+    <label for="published_date">Udgivelsesdato:</label>
+    <input type="date" id="published_date" name="published_date" required>
+
+    <label for="newsletter_file">Upload fil med nyhedsbrev (PDF):</label>
+    <input class="button" type="file" id="newsletter_file" name="newsletter_file" accept=".pdf" required>
+
+    <label for="thumbnail_file">Upload thumbnail fil - 280 x 395 pixels (PNG):</label>
+    <input class="button" type="file" id="thumbnail_file" name="thumbnail_file" accept=".png" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button class="button" type="submit" formaction="/admin/newsletters/add">Tilføj nyhedsbrev til samlingen</button>
+</form>
+</body>
+</html>
