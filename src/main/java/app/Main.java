@@ -19,7 +19,7 @@ public class Main {
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
-    private static final String DB = "newsletter";
+    private static final String DB = "Newsletters";
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
     private static final HomeController homeController = new HomeController(connectionPool);
@@ -44,6 +44,7 @@ public class Main {
         // Routing
         app.get("/", ctx -> homeController.home(ctx));
         app.post("/", ctx -> homeController.subscribe(ctx));
+        app.get("/searchbar", ctx -> homeController.search(ctx)); //en route der lytter på /searchbar - sættes i index.html
         app.post("/admin/newsletters/subscribe", ctx -> homeController.subscribe(ctx));
         app.get("/admin/newsletters/add", ctx -> ctx.render("admin/add-newsletter.html"));
         app.post("/admin/newsletters/add", ctx -> adminController.addNewsletter(ctx));

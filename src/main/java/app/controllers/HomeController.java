@@ -22,6 +22,20 @@ public class HomeController {
         ctx.render("index.html");
     }
 
+    public void search(Context ctx) throws DatabaseException {
+        String word = ctx.queryParam("searchbar");
+        System.out.println("TEST " + word);
+        List<Newsletter> newsletterList = NewsletterMapper.wordSearch(word, connectionPool);
+        if (!newsletterList.isEmpty()) {
+            System.out.println("TEST2");
+            ctx.attribute("newsletters", newsletterList);
+        } else {
+            ctx.attribute("message", "Ordet kunne ikke findes i nogle nyhedsbreve");
+        }
+        ctx.render("index.html");
+    }
+
+
     public void subscribe(Context ctx) throws DatabaseException {
         String email = ctx.formParam("email");
         String message = "";

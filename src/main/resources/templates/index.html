@@ -15,6 +15,12 @@
     <button type="submit" name="learn more" th:formaction="@{/admin/newsletters/subscribe}">Learn more</button>
 </form>
 
+<form method="get">
+    <label for="searchbar"></label>
+    <input type="search" name="searchbar" id="searchbar" placeholder="Søg efter et emne">
+    <button type="submit" name="søg" th:formaction="@{/searchbar}">Søg</button>
+</form>
+
 <div class="subscriber-message" th:if="${message}"><p th:text="${message}"></p></div>
 
 
@@ -29,11 +35,10 @@
             </a>
             <p class="teaser" th:text="${newsletter.teaserText}"></p>
         </div>
-
     </div>
 </div>
 
-
 <p><a href="../templates/admin/add-newsletter.html" th:href="@{/admin/newsletters/add}">Add newsletter</a></p>
+
 </body>
 </html>

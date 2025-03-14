@@ -12,11 +12,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsletterMapper {
+
+    public static List<Newsletter> wordSearch (String word, ConnectionPool connectionPool) throws DatabaseException {
+        List<Newsletter> newsletterList = new ArrayList<>();
+        String sql = "SELECT id, title, teaser_text, pdf_file_name, thumbnail_file_name, published FROM public.newsletter WHERE teaser_text ILIKE ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setString(1, "%" + word + "%");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String teaserText = rs.getString("teaser_text");
+                String pdfFileName = rs.getString("pdf_file_name");
+                String thumbnailFileName = rs.getString("thumbnail_file_name");
+                LocalDate published = LocalDate.parse(rs.getString("published"));
+                newsletterList.add(new Newsletter(id, title, teaserText, pdfFileName, thumbnailFileName, published));
+                System.out.println("TEST: Fundet nyhedsbrev");
+            }
+            return newsletterList;
+        } catch (SQLException e) {
+            String msg = "Der er sket en fejl under din søgning. Prøv igen";
+            throw new DatabaseException(msg, e.getMessage());
+        }
+    }
+
+
     public static int subscribe(String email, ConnectionPool connectionPool) throws DatabaseException {
 
         String sql = "INSERT INTO subscriber (email, creation_date) VALUES (?, CURRENT_DATE) ON CONFLICT (email) DO NOTHING";
-        try (
-                Connection connection = connectionPool.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)
         ) {
             ps.setString(1, email);
             int rowsAffected = ps.executeUpdate();
